@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    tasks = Task.order("created_at DESC")
+    tasks = Task.where(done: false)
     render json: tasks
   end
 
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def destroy
     task = Task.find(params[:id])
     task.destroy
-    redirect_to action :index
+    redirect_to tasks_path
   end
 
   private
